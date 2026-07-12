@@ -25,8 +25,13 @@ export default function Nav() {
         padding: scrolled ? "0 48px" : "0 28px",
         height: "60px",
         borderRadius: scrolled ? "0px" : "100px",
-        border: scrolled ? "1px solid transparent" : "1px solid var(--border)",
-        borderBottom: scrolled ? "1px solid var(--border)" : "1px solid var(--border)",
+        
+        // JAVÍTÁS: Külön kezeljük a kereteket, így nincs ütközés és hibaüzenet
+        borderTop: scrolled ? "1px solid transparent" : "1px solid var(--border)",
+        borderLeft: scrolled ? "1px solid transparent" : "1px solid var(--border)",
+        borderRight: scrolled ? "1px solid transparent" : "1px solid var(--border)",
+        borderBottom: "1px solid var(--border)", // Ez mindkét állapotban ugyanaz, így maradhat fixen
+        
         background: scrolled ? "rgba(253,251,247,0.92)" : "rgba(253,251,247,0.7)",
         backdropFilter: "blur(14px)",
         boxShadow: scrolled ? "none" : "0 8px 30px rgba(26,26,26,0.06)",

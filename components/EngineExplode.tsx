@@ -27,9 +27,18 @@ export default function EngineExplode() {
     let disposed = false;
     let st: ScrollTrigger | undefined;
 
-    import("three").then((ThreeLib) => {
+    // Megadjuk az objektumot, ahova az alkatrészek referenciáit mentjük
+    const meshes: Record<string, THREE.Object3D> = {};
+    let mainEngineModel: THREE.Group | null = null;
+
+    // Háttérben töltjük be a Three.js-t és a betöltőt egyszerre
+    Promise.all([
+      import("three"),
+      import("three/examples/jsm/loaders/GLTFLoader.js")
+    ]).then(([ThreeLib, GLTFModule]) => {
       if (disposed) return;
 
+      // 1. Renderer és Scene beállítása
       const renderer = new ThreeLib.WebGLRenderer({ canvas, alpha: true, antialias: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(canvas.clientWidth, canvas.clientHeight);
@@ -39,30 +48,43 @@ export default function EngineExplode() {
       camera.position.set(4.2, 0.4, 5.5);
       camera.lookAt(0, 0, 0);
 
-      const mat = new ThreeLib.MeshNormalMaterial({ wireframe: true });
-      const meshes: Record<PartKey, THREE.Mesh> = {} as Record<PartKey, THREE.Mesh>;
+      // 2. Fények (Kötelező a GLB fájlokhoz!)
+      const ambientLight = new ThreeLib.AmbientLight(0xffffff, 0.7);
+      scene.add(ambientLight);
 
-      const headGeo = new ThreeLib.BoxGeometry(1.6, 0.5, 1.2);
-      meshes.head = new ThreeLib.Mesh(headGeo, mat);
+      const dirLight = new ThreeLib.DirectionalLight(0xffffff, 1.5);
+      dirLight.position.set(5, 10, 7);
+      scene.add(dirLight);
 
-      const pistonGeo = new ThreeLib.CylinderGeometry(0.32, 0.32, 1.1, 16);
-      meshes.piston = new ThreeLib.Mesh(pistonGeo, mat);
+      // 3. Modell betöltése a megadott mappából
+      const loader = new GLTFModule.GLTFLoader();
+      
+      loader.load(
+        "/models/sputnikjfkennedy-engine-4331.glb",
+        (gltf) => {
+          if (disposed) return;
 
-      const blockGeo = new ThreeLib.BoxGeometry(1.8, 1.0, 1.4);
-      meshes.block = new ThreeLib.Mesh(blockGeo, mat);
+          mainEngineModel = gltf.scene;
+          mainEngineModel.scale.set(1.5, 1.5, 1.5);
+          mainEngineModel.position.set(0, -0.5, 0); // Kicsit lejjebb visszük, hogy középen legyen
+          scene.add(mainEngineModel);
 
-      const crankGeo = new ThreeLib.CylinderGeometry(0.16, 0.16, 2.2, 12);
-      meshes.crank = new ThreeLib.Mesh(crankGeo, mat);
-      meshes.crank.rotation.z = Math.PI / 2;
+          // Megkeressük a GLB-n belüli alkatrészeket név alapján
+          parts.forEach((p) => {
+            const partObject = mainEngineModel?.getObjectByName(p.key);
+            if (partObject) {
+              meshes[p.key] = partObject;
+              partObject.position.y = p.assembledY;
+            }
+          });
+        },
+        undefined,
+        (error) => {
+          console.error("Hiba történt a GLB betöltése közben:", error);
+        }
+      );
 
-      const panGeo = new ThreeLib.BoxGeometry(1.7, 0.4, 1.3);
-      meshes.pan = new ThreeLib.Mesh(panGeo, mat);
-
-      parts.forEach((p) => {
-        meshes[p.key].position.y = p.assembledY;
-        scene.add(meshes[p.key]);
-      });
-
+      // 4. Átmretezés kezelése
       const resize = () => {
         renderer.setSize(canvas.clientWidth, canvas.clientHeight);
         camera.aspect = canvas.clientWidth / canvas.clientHeight;
@@ -70,22 +92,32 @@ export default function EngineExplode() {
       };
       window.addEventListener("resize", resize);
 
+      // 5. Animációs ciklus
       let rotY = -0.5;
       const animate = () => {
         animId = requestAnimationFrame(animate);
         rotY += 0.0012;
         const progress = progressRef.current;
 
+        // Ha megtalálta az alkatrészeket név szerint, akkor robbantja őket
         parts.forEach((p) => {
           const mesh = meshes[p.key];
-          mesh.position.y = gsap.utils.interpolate(p.assembledY, p.explodedY, progress);
-          mesh.rotation.y = rotY;
+          if (mesh) {
+            mesh.position.y = gsap.utils.interpolate(p.assembledY, p.explodedY, progress);
+            mesh.rotation.y = rotY;
+          }
         });
+
+        // Ha nem talált külön alkatrészeket, akkor a teljes motort forgatja elegánsan
+        if (Object.keys(meshes).length === 0 && mainEngineModel) {
+          mainEngineModel.rotation.y = rotY;
+        }
 
         renderer.render(scene, camera);
       };
       animate();
 
+      // 6. ScrollTrigger konfiguráció
       st = ScrollTrigger.create({
         trigger: section,
         start: "top top",
