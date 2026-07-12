@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -19,22 +20,19 @@ export default function Nav() {
       backdropFilter: scrolled ? "blur(12px)" : "none",
       transition: "all 0.4s ease",
     }}>
-      <span style={{ fontFamily: "'DM Serif Display', serif", fontSize: "18px", letterSpacing: "-0.01em" }}>
+      <Link href="/" style={{ fontFamily: "'DM Serif Display', serif", fontSize: "18px", letterSpacing: "-0.01em", textDecoration: "none", color: "var(--ink)" }}>
         Dani Benedek
-      </span>
+      </Link>
       <div style={{ display: "flex", gap: "36px", alignItems: "center" }}>
-        {["Projektek","Tapasztalat","Rólam"].map(l => (
-          <a key={l} href={`#${l.toLowerCase()}`} className="line-link"
-            style={{ fontSize: "13px", color: "var(--muted)", letterSpacing: "0.04em", textTransform: "uppercase" }}>
-            {l}
-          </a>
-        ))}
-        <a href="mailto:hello@danibenedek.com" style={{
+        <a href="/#projektek" className="line-link" style={{ fontSize: "13px", color: "var(--muted)", letterSpacing: "0.04em", textTransform: "uppercase" }}>Projektek</a>
+        <Link href="/gallery" className="line-link" style={{ fontSize: "13px", color: "var(--muted)", letterSpacing: "0.04em", textTransform: "uppercase" }}>Gallery</Link>
+        <a href="/#rólam" className="line-link" style={{ fontSize: "13px", color: "var(--muted)", letterSpacing: "0.04em", textTransform: "uppercase" }}>Rólam</a>
+        <a data-magnetic href="mailto:hello@danibenedek.com" style={{
           fontSize: "13px", padding: "8px 20px",
           border: "1px solid var(--ink)", borderRadius: "100px",
           textDecoration: "none", color: "var(--ink)",
           letterSpacing: "0.04em", textTransform: "uppercase",
-          transition: "background 0.2s, color 0.2s",
+          transition: "background 0.2s, color 0.2s", display: "inline-block",
         }}
           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "var(--ink)"; (e.currentTarget as HTMLElement).style.color = "var(--bg)"; }}
           onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; (e.currentTarget as HTMLElement).style.color = "var(--ink)"; }}

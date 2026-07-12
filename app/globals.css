@@ -26,23 +26,19 @@ body { overflow-x: hidden; }
 /* cursor */
 .cursor {
   position: fixed;
+  top: -5px; left: -5px;
   width: 10px; height: 10px;
   background: var(--ink);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.12s ease, background 0.2s;
+  transition: background 0.15s, scale 0.15s ease;
 }
 .cursor.hover {
-  transform: translate(-50%, -50%) scale(4);
+  scale: 4;
   background: var(--accent);
   opacity: 0.2;
 }
-
-::-webkit-scrollbar { width: 2px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--ink); }
 
 /* marquee */
 @keyframes marquee {
