@@ -113,7 +113,7 @@ export default function ContactPeek({ onClose }: { onClose: () => void }) {
               fontSize: "17px",
             }}
           >
-            @dani.benedek
+            @dani_benedek
           </span>
         </div>
 
