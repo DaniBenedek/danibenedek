@@ -5,9 +5,9 @@ import { gsap } from "@/lib/gsap";
 type Category = "all" | "photography" | "bts" | "cad";
 
 const items: { src: string; category: Exclude<Category, "all">; caption: string }[] = [
-  { src: "/gallery/photo-1.jpg", category: "photography", caption: "Útközben" },
-  { src: "/gallery/bts-1.jpg", category: "bts", caption: "Munka közben" },
-  { src: "/gallery/cad-1.jpg", category: "cad", caption: "Robbantott nézet — folyamatban" },
+  { src: "/gallery/mike.jpg", category: "photography", caption: "Útközben" },
+  { src: "/gallery/senna.jpg", category: "bts", caption: "Munka közben" },
+  { src: "/gallery/tony.jpg", category: "cad", caption: "Robbantott nézet — folyamatban" },
   // add your own — see note below
 ];
 

@@ -72,3 +72,51 @@ body { overflow-x: hidden; }
   transition: width 0.3s ease;
 }
 .line-link:hover::after { width: 100%; }
+
+/* ===== Responsive overrides ===== */
+@media (max-width: 768px) {
+  section {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  /* any 2-column grid (Projects, About) collapses to 1 column */
+  #projektek > div[style*="grid-template-columns: 1fr 1fr"],
+  #rólam > div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  /* nav: tighten the pill so it doesn't overflow on small screens */
+  nav {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    gap: 0 !important;
+  }
+  nav > div {
+    gap: 16px !important;
+  }
+  nav a[href="mailto:hello@danibenedek.com"] {
+    padding: 6px 14px !important;
+    font-size: 11px !important;
+  }
+
+  /* engine explode: the 3D canvas eats the whole screen behind text on
+     narrow viewports and makes the section unreadable — hide it below
+     tablet width and just show the text + part list */
+  .engine-canvas {
+    display: none !important;
+  }
+
+  /* hero heading: clamp() already scales it, but tighten line spacing
+     further so 3 stacked words don't push the CTA off-screen */
+  h1 {
+    margin-bottom: 24px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  nav a.line-link {
+    display: none !important; /* keep logo + contact button visible, drop the middle links */
+  }
+}

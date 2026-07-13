@@ -42,7 +42,7 @@ export default function Nav() {
         </Link>
         <div style={{ display: "flex", gap: "36px", alignItems: "center" }}>
           <a href="/#projektek" className="line-link" style={{ fontSize: "13px", color: "var(--muted)", letterSpacing: "0.04em", textTransform: "uppercase" }}>Projektek</a>
-          <Link href="/gallery" className="line-link" style={{ fontSize: "13px", color: "var(--muted)", letterSpacing: "0.04em", textTransform: "uppercase" }}>Gallery</Link>
+          <Link href="/gallery/" className="line-link" style={{ fontSize: "13px", color: "var(--muted)", letterSpacing: "0.04em", textTransform: "uppercase" }}>Gallery</Link>
           <a href="/#rólam" className="line-link" style={{ fontSize: "13px", color: "var(--muted)", letterSpacing: "0.04em", textTransform: "uppercase" }}>Rólam</a>
           <a data-magnetic href="mailto:hello@danibenedek.com" style={{
             fontSize: "13px", padding: "8px 20px",

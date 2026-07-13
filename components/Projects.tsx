@@ -38,17 +38,34 @@ export default function Projects() {
         });
       });
 
+      // Cseréld le a teljes ".tilt-card" részt erre:
       gsap.utils.toArray<HTMLElement>(".tilt-card").forEach((card) => {
-        const rotX = gsap.quickTo(card, "rotateX", { duration: 0.4, ease: "power3" });
-        const rotY = gsap.quickTo(card, "rotateY", { duration: 0.4, ease: "power3" });
         const onMove = (e: MouseEvent) => {
           const rect = card.getBoundingClientRect();
           const px = (e.clientX - rect.left) / rect.width - 0.5;
           const py = (e.clientY - rect.top) / rect.height - 0.5;
-          rotY(px * 10);
-          rotX(-py * 10);
+          
+          // quickTo helyett sima gsap.to-t használunk alacsony duration-nel,
+          // így a transform-ot módosítja, amit a GSAP revert() gond nélkül tud törölni
+          gsap.to(card, {
+            rotateY: px * 10,
+            rotateX: -py * 10,
+            duration: 0.4,
+            ease: "power3.out",
+            overwrite: "auto"
+          });
         };
-        const onLeave = () => { rotX(0); rotY(0); };
+      
+        const onLeave = () => {
+          gsap.to(card, {
+            rotateX: 0,
+            rotateY: 0,
+            duration: 0.4,
+            ease: "power3.out",
+            overwrite: "auto"
+          });
+        };
+      
         card.addEventListener("mousemove", onMove);
         card.addEventListener("mouseleave", onLeave);
       });
