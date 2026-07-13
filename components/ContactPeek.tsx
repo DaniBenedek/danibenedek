@@ -212,7 +212,7 @@ export default function ContactPeek({ onClose }: { onClose: () => void }) {
 
         <a
           data-magnetic
-          href="mailto:hello@danibenedek.com"
+          href="mailto:dbenedek06@gmail.com"
           style={{
             fontSize: "13px",
             padding: "12px 16px",

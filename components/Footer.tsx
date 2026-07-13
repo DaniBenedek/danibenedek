@@ -8,7 +8,7 @@ export default function Footer() {
       </h2>
 
       <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", marginBottom: "80px" }}>
-        <a href="mailto:hello@danibenedek.com" 
+        <a href="mailto:dbenedek06@gmail.com" 
            style={{ fontSize: "14px", 
                     padding: "16px 36px", 
                     background: "var(--ink)", 
@@ -21,7 +21,7 @@ export default function Footer() {
                   }}
           onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "var(--accent)"}
           onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = "var(--ink)"}>
-          hello@danibenedek.com ↗
+          dbenedek06@gmail.com ↗
         </a>
         <a href="https://www.linkedin.com/in/dani-benedek-15470626a/" 
            target="_blank" 
