@@ -1,11 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
-import type * as THREE from "three";
-import RevCounter from "./RevCounter";
+import TrackAnimation from "./TrackAnimation";
 
 export default function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const rootRef = useRef<HTMLElement>(null);
   const [time, setTime] = useState("");
 
@@ -14,100 +12,6 @@ export default function Hero() {
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    let animId: number;
-    let disposed = false;
-
-    import("three").then((ThreeLib) => {
-      if (disposed) return;
-      const renderer = new ThreeLib.WebGLRenderer({ canvas, alpha: true, antialias: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-
-      const scene = new ThreeLib.Scene();
-      const camera = new ThreeLib.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
-      camera.position.set(3.5, 1.8, 4.5);
-      camera.lookAt(0, 0, 0);
-
-      const rig = new ThreeLib.Group();
-      scene.add(rig);
-
-      const matMetal = new ThreeLib.MeshNormalMaterial({ wireframe: true });
-
-      const crank = new ThreeLib.Mesh(new ThreeLib.CylinderGeometry(0.15, 0.15, 2.4, 12), matMetal);
-      crank.rotation.z = Math.PI / 2;
-      rig.add(crank);
-
-      const cylinderCount = 3;
-      const pistons: THREE.Mesh[] = [];
-      const cylinders: THREE.Mesh[] = [];
-
-      for (let i = 0; i < cylinderCount; i++) {
-        const offsetX = (i - 1) * 0.9;
-
-        const cyl = new ThreeLib.Mesh(new ThreeLib.CylinderGeometry(0.35, 0.35, 1.6, 16, 1, true), matMetal);
-        cyl.position.set(offsetX, 1.0, 0);
-        rig.add(cyl);
-        cylinders.push(cyl);
-
-        const piston = new ThreeLib.Mesh(new ThreeLib.CylinderGeometry(0.32, 0.32, 0.4, 16), matMetal);
-        piston.position.set(offsetX, 1.0, 0);
-        rig.add(piston);
-        pistons.push(piston);
-
-        const rod = new ThreeLib.Mesh(new ThreeLib.CylinderGeometry(0.05, 0.05, 1, 6), matMetal);
-        rod.position.set(offsetX, 0.5, 0);
-        rig.add(rod);
-      }
-
-      const flywheel = new ThreeLib.Mesh(new ThreeLib.TorusGeometry(0.9, 0.12, 8, 24), matMetal);
-      flywheel.position.set(1.8, 0, 0);
-      flywheel.rotation.y = Math.PI / 2;
-      rig.add(flywheel);
-
-      rig.rotation.y = -0.4;
-      rig.scale.setScalar(0.85);
-
-      const resize = () => {
-        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-        camera.aspect = canvas.clientWidth / canvas.clientHeight;
-        camera.updateProjectionMatrix();
-      };
-      window.addEventListener("resize", resize);
-
-      let crankAngle = 0;
-      const animate = () => {
-        animId = requestAnimationFrame(animate);
-        crankAngle += 0.06;
-        crank.rotation.x = crankAngle;
-        flywheel.rotation.x = crankAngle;
-
-        pistons.forEach((piston, i) => {
-          const phase = crankAngle + (i * (Math.PI * 2)) / cylinderCount;
-          piston.position.y = 1.0 + Math.sin(phase) * 0.35;
-        });
-
-        rig.rotation.y += 0.0015;
-        renderer.render(scene, camera);
-      };
-      animate();
-
-      return () => {
-        disposed = true;
-        cancelAnimationFrame(animId);
-        window.removeEventListener("resize", resize);
-        renderer.dispose();
-      };
-    });
-
-    return () => {
-      disposed = true;
-      cancelAnimationFrame(animId);
-    };
   }, []);
 
   useEffect(() => {
@@ -128,10 +32,11 @@ export default function Hero() {
 
   return (
     <section ref={rootRef} style={{ minHeight: "100svh", padding: "0 48px", display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", overflow: "hidden" }}>
-      <canvas ref={canvasRef} style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", width: "50vw", height: "80vh", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", width: "48vw", height: "70vh", pointerEvents: "none" }}>
+        <TrackAnimation />
+      </div>
 
-      <div className="hero-meta" style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "32px", marginTop: "80px" }}>
-        <RevCounter />
+      <div className="hero-meta" style={{ display: "flex", alignItems: "center", marginBottom: "32px", marginTop: "80px" }}>
         <span style={{ marginLeft: "auto", fontSize: "12px", color: "var(--muted)", fontVariantNumeric: "tabular-nums" }}>{time} · Makó, HU</span>
       </div>
 

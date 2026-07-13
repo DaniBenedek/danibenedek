@@ -55,7 +55,7 @@ export default function About() {
         Not a résumé.<br /><em>Just me.</em>
       </h2>
       <p style={{ textAlign: "center", maxWidth: "480px", margin: "0 auto 100px", fontSize: "16px", color: "var(--muted)", fontWeight: 300, lineHeight: 1.7 }}>
-        19, Makó. Nappal mechanikai alkatrészeket tervezek, este a saját weboldalamat törögetem — kiderült, hogy a CAD-tűrések és a CSS-margók ugyanazt a viszketést vakarják.
+        2006 -os szültesű. Nappal autó jármű szerelés, alkatrész tervezés esete kikapcsolódás. Csapatjátékos
       </p>
 
       <div style={{ position: "relative", maxWidth: "900px", margin: "0 auto" }}>
