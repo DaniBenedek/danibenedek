@@ -120,3 +120,9 @@ body { overflow-x: hidden; }
     display: none !important; /* keep logo + contact button visible, drop the middle links */
   }
 }
+
+@media (max-width: 768px) {
+  .aero-canvas {
+    display: none !important;
+  }
+}
