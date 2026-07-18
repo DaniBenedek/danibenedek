@@ -46,6 +46,10 @@ export default function Hero() {
         <span style={{ display: "block", overflow: "hidden" }}><span className="hero-line" style={{ display: "block" }}>&amp; DEVELOPER</span></span>
       </h1>
 
+      <p className="sr-only">
+        Benedek Dani — mechanikai tervező és szoftverfejlesztő Makón. SolidWorks, Fusion 360, Inventor CAD tervezés és modern webfejlesztés.
+      </p>
+
       <p className="hero-sub" style={{ maxWidth: "400px", fontSize: "16px", color: "var(--muted)", lineHeight: 1.7, fontWeight: 300, marginBottom: "48px" }}>
         19 éves fejlesztő és mechanikai tervező Makóról. SolidWorks-től Three.js-ig — és ha épp nem tervezek, valószínűleg egy Forma-1 futamot nézek.
       </p>

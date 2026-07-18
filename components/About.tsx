@@ -15,7 +15,7 @@ const branches: Branch[] = [
   { side: "left", img: "/about/lauda-helmet.jpg", tag: "BUILDING", text: "Ha valami elromlik, előbb szedem szét, mint hogy megkérdezném valakitől, hogyan javítsam. Néha rosszabb lesz. Megérte.", rotate: 8 },
   { side: "right", img: "/about/travel.jpg", tag: "TRAVEL", text: "Az útlevelem többet dolgozik, mint a jogosítványom — bár az autó is látott már pár hosszabb utat.", rotate: -9 },
   { side: "left", img: "/about/en-szereles.jpeg", tag: "PROJEKT", text: "A motor most épp szét van szedve. Szó szerint.", rotate: 5 },
-  { side: "right", img: "/about/travel-2.jpg", tag: "TRAVEL", text: "Legutóbb ott jártam, ahol a térkép már nem magyarul van feliratozva.", rotate: -4 },
+  { side: "right", img: "/about/sutogetes.jpg", tag: "TRAVEL", text: "Legutóbb ott jártam, ahol a térkép már nem magyarul van feliratozva.", rotate: -4 },
 ];
 
 export default function About() {

@@ -5,9 +5,7 @@ export const metadata: Metadata = {
   title: "Benedek Dani | Mechanikai Tervező & Szoftverfejlesztő Portfólió",
   description: "Benedek Dani portfólió oldala. Mechanikai design (SolidWorks, Fusion 360, Inventor) és webfejlesztés szoftverfejlesztő végzettséggel. CAD tervezés és programozás Makón.",
   metadataBase: new URL("https://danibenedek.com"),
-  alternates: { 
-    canonical: "https://danibenedek.com" 
-  },
+  alternates: { canonical: "https://danibenedek.com/" },
   openGraph: {
     title: "Benedek Dani | Mechanikai Tervező & Szoftverfejlesztő",
     description: "CAD mechanikai tervezés (SolidWorks, Fusion 360) és modern webfejlesztés egy helyen. Tekintsd meg a projektjeimet!",
@@ -56,6 +54,31 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="hu">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400&display=swap"
+          rel="stylesheet"
+        />
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Person",
+                name: "Benedek Dani",
+                url: "https://danibenedek.com",
+                jobTitle: "Mechanikai tervező és szoftverfejlesztő",
+                address: { "@type": "PostalAddress", addressLocality: "Makó", addressCountry: "HU" },
+                knowsAbout: ["SolidWorks", "Fusion 360", "Inventor", "Next.js", "GSAP", "Three.js"],
+                sameAs: [
+                  "https://instagram.com/dani.benedek"
+                ],
+              }),
+            }}
+          />
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   );
