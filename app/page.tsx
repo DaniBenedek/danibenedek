@@ -1,7 +1,7 @@
 import Cursor from "@/components/Cursor";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import EngineExplode from "@/components/EngineExplode";
+import AeroFlow from "@/components/AeroFlow";
 import Projects from "@/components/Projects";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
@@ -13,7 +13,7 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <EngineExplode />
+        <AeroFlow />
         <Projects />
         <About />
         <Footer />
