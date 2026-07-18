@@ -1,0 +1,26 @@
+# Benedek Dani
+
+> Mechanikai tervező és szoftverfejlesztő Makón, Magyarországon. CAD tervezés (SolidWorks, Fusion 360, Inventor) és modern webfejlesztés (Next.js, GSAP, Three.js) egy portfólión belül. Motorsport és autóépítés iránti szenvedéllyel, hosszú távú célja belépni a Forma-1 aerodinamikai csapatába.
+
+Ez egy személyes portfólió oldal, nem cégoldal. A hangsúly a kézzelfogható munkákon és a személyiségen van, nem egy hagyományos önéletrajzon.
+
+## Fő oldalak
+
+- [Főoldal](https://danibenedek.com/): Bemutatkozás, robbantott motor animáció, F1 aerodinamikai áramlás-vizualizáció, kiemelt projektek.
+- [Projektek](https://danibenedek.com/#projektek): CAD projektek (SolidWorks, Fusion 360) és élő webfejlesztési munkák.
+- [Galéria](https://danibenedek.com/gallery/): Fotók, behind-the-scenes pillanatok és CAD renderek.
+- [Rólam](https://danibenedek.com/#rólam): Személyes háttér — motorsport, kézi szerelés, utazás.
+
+## Készségek
+
+- CAD: SolidWorks, Fusion 360, Inventor
+- Web: Next.js, TypeScript, GSAP, Three.js
+
+## Kapcsolat
+
+- Email: hello@danibenedek.com
+- Instagram: https://instagram.com/dani.benedek
+
+## Optional
+
+- [Sitemap](https://danibenedek.com/sitemap.xml): Teljes URL-lista keresőmotoroknak.
